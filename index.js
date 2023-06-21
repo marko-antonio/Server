@@ -1,14 +1,9 @@
 const express = require('express');
-const twilio = require('twilio');
 const app = express();
+var cors = require("cors");
 const moment = require('moment');
 
 
-
-
-
-
-var cors = require("cors");
 const PORT = process.env.PORT || 5010;
 
 app.listen(PORT,()=>{
@@ -16,39 +11,15 @@ app.listen(PORT,()=>{
 });
 
 
-//for testing of sms noti
-// const accountSid = '';
-// const authToken = '';
-
-// async function sendSMS(){
-//     const client =  new twilio(accountSid,authToken)
-
-//     return client.messages
-//         .create({
-//             body: 'Hello from J, This is for testing',
-//             to: '+639072634219', // Text your number
-//             from: '+14302305151', // From a valid Twilio number
-//         })
-//         .then((message) => console.log(message, "Message Sent"))
-//         .catch(err =>console.log(err));
-// }
-
-// sendSMS();
 
 //for Cors
-app.use(cors({
-    origin:["http://localhost"],
-    methods:["POST","GET"],
-    credentials: true
-}));
+app.use(cors());
 
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:false}));
 
 
 /* Routes */
-const accountsRoute = require('./routes/test/accounts'); // for testing
-const TokenVerficationRoute = require('./routes/verifyToken/TokenVerification');
+const accountsRoute = require('./routes/test/accounts')
 
 app.use('/api', accountsRoute);
-app.use('/API/VerifyToken', TokenVerficationRoute);

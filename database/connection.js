@@ -1,14 +1,12 @@
 const mysql = require('mysql2')
-const dotenv = require('dotenv');
 
-dotenv.config({path: './.env'})
 const dbConfig = {
 
-        host: process.env.DATABASE_HOST,
-        user: process.env.DATABASE_USER,
-        password: process.env.DATABASE_PASSWORD,
-        database:process.env.DATABASE,
-        port: process.env.DATABASE_PORT
+        host: 'localhost',
+        user:'admin',
+        password: '@Dmin_3214',
+        database: 'csdr_is',
+        port: '3306'
 
 }
 

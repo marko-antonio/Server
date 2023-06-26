@@ -37,7 +37,7 @@ app.listen(PORT,()=>{
 
 //for Cors
 app.use(cors({
-    origin:["http://localhost"],
+    // origin:["http://localhost"],
     methods:["POST","GET"],
     credentials: true
 }));

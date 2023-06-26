@@ -60,6 +60,9 @@ const TokenVerficationRoute = require('./routes/verifyToken/TokenVerification');
 const Registration = require('./routes/accounts/registration.js'); 
 
 
+/*Registration*/
+const Login = require('./routes/accounts/login.js'); 
+
 
 
 /** --------------------------------- API Link ---------------------------------*/
@@ -72,5 +75,9 @@ app.use('/API/VerifyToken', TokenVerficationRoute);
 
 /** Registration */
 app.use('/crdis/registration', Registration);
+
+
+/** Registration */
+app.use('/crdis/login', Login);
 
 

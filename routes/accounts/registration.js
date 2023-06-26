@@ -2,8 +2,6 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
 
 const RegisterAccount = require('../../services/accounts/registration');
 const checkUsername = require('../../services/accounts/checkusername');

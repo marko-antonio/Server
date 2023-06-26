@@ -2,8 +2,7 @@ const express = require('express');
 const twilio = require('twilio');
 const app = express();
 const moment = require('moment');
-
-
+const dotenv = require('dotenv');
 
 
 
@@ -15,7 +14,7 @@ app.listen(PORT,()=>{
     console.log('Server is started in port ' + PORT);
 });
 
-
+/********************** Twilio Sms Noti ***************************************/
 //for testing of sms noti
 // const accountSid = '';
 // const authToken = '';
@@ -35,7 +34,7 @@ app.listen(PORT,()=>{
 
 // sendSMS();
 
-//for Cors
+/************************************ Cors **********************************/
 app.use(cors({
     // origin:["http://localhost"],
     methods:["POST","GET"],
@@ -45,7 +44,24 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+/** ----------------------------------- Middleware to verify the token ----------------------------*/
 
+dotenv.config({path: './.env'})
+
+const secretKey = process.env.JWT_SECRET
+
+function verifyToken(req, res, next) {
+    const bearerHeader = req.headers['authorization'];
+  
+    if (typeof bearerHeader !== 'undefined') {
+      const bearerToken = bearerHeader.split(' ')[1];
+      req.token = bearerToken;
+      next();
+    } 
+    else {
+      res.status(403).json({ error: 'Unauthorized' });
+    }
+}
 
 /** --------------------------------- Routes ---------------------------------*/
 
@@ -60,24 +76,35 @@ const TokenVerficationRoute = require('./routes/verifyToken/TokenVerification');
 const Registration = require('./routes/accounts/registration.js'); 
 
 
-/*Registration*/
+/*Login*/
 const Login = require('./routes/accounts/login.js'); 
 
 
+/*get All User*/
+const AllUser = require('./routes/accounts/alluser.js'); 
 
 /** --------------------------------- API Link ---------------------------------*/
 
+
+/************************ For Testing **************************************/
 app.use('/api', accountsRoute); // for testing
 
 
 /*Registration*/
-app.use('/API/VerifyToken', TokenVerficationRoute);
+app.use('/API/VerifyToken', TokenVerficationRoute); // for testing of Token
+
+/**************************************************************************/
+
 
 /** Registration */
 app.use('/crdis/registration', Registration);
 
 
-/** Registration */
+/** Login */
 app.use('/crdis/login', Login);
+
+
+/** Get All User */
+app.use('/crdis/users', verifyToken, AllUser);
 
 

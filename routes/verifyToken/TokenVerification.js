@@ -1,7 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken');
-const secretKey = 'your_secret_key'; // Replace with your own secret key
+const dotenv = require('dotenv');
+
+
+dotenv.config({path: './.env'})
+
+const secretKey = process.env.JWT_SECRET
 
 // Middleware to verify the token
 function verifyToken(req, res, next) {
@@ -14,7 +19,7 @@ function verifyToken(req, res, next) {
     } else {
       res.status(403).json({ error: 'Unauthorized' });
     }
-  }
+}
   
 router.get('/protected', verifyToken, (req, res) => {
     // Verify and decode the token

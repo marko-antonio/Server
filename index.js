@@ -46,9 +46,31 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 
-/* Routes */
+
+/** --------------------------------- Routes ---------------------------------*/
+
 const accountsRoute = require('./routes/test/accounts'); // for testing
+
+
+/* Verification  */
 const TokenVerficationRoute = require('./routes/verifyToken/TokenVerification');
 
-app.use('/api', accountsRoute);
+
+/*Registration*/
+const Registration = require('./routes/accounts/registration.js'); 
+
+
+
+
+/** --------------------------------- API Link ---------------------------------*/
+
+app.use('/api', accountsRoute); // for testing
+
+
+/*Registration*/
 app.use('/API/VerifyToken', TokenVerficationRoute);
+
+/** Registration */
+app.use('/crdis/registration', Registration);
+
+

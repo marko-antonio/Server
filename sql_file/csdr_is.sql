@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 16/06/2023 00:01:40
+ Date: 26/06/2023 20:58:16
 */
 
 SET NAMES utf8mb4;
@@ -88,19 +88,23 @@ CREATE TABLE `tbl_thesis`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_user`;
 CREATE TABLE `tbl_user`  (
-  `id` int UNSIGNED NOT NULL,
-  `userinfo_id` int NULL DEFAULT NULL,
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `password` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `lastmodified` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `firstname` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `middlename` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `lastname` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `status` smallint NULL DEFAULT NULL COMMENT '0- not Verify, 1 - new, 2 - active, 3 - Deactivate',
   `createdon` timestamp NULL DEFAULT NULL,
-  `status` smallint NULL DEFAULT NULL COMMENT '1 - new, 2 - active, 3 - Deactivate',
+  `lastmodified` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tbl_user
 -- ----------------------------
+INSERT INTO `tbl_user` VALUES (2, 'admin', '$2b$04$npu/tKdhkuDxI54ljqtZt.fJmRjXiiOxOMkOEvN.SPMJq5p6PFT5S', 'test', 'testm', 'testlastname', 'sadsad@gmail.com', 0, '2023-06-21 22:27:04', '2023-06-21 22:27:04');
 
 -- ----------------------------
 -- Table structure for tbl_userinfo
@@ -108,10 +112,8 @@ CREATE TABLE `tbl_user`  (
 DROP TABLE IF EXISTS `tbl_userinfo`;
 CREATE TABLE `tbl_userinfo`  (
   `id` int NOT NULL,
+  `tbl_user_id` int NULL DEFAULT NULL,
   `tbl_course_id` int NULL DEFAULT NULL,
-  `first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `middle_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `typeofid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `idnumber` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `contacts` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
@@ -124,6 +126,7 @@ CREATE TABLE `tbl_userinfo`  (
 -- ----------------------------
 -- Records of tbl_userinfo
 -- ----------------------------
+INSERT INTO `tbl_userinfo` VALUES (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for user
@@ -143,7 +146,7 @@ CREATE TABLE `user`  (
   `account_status` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`iduser`) USING BTREE,
   UNIQUE INDEX `idx_username`(`username` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user

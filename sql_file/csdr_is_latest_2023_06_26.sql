@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 26/06/2023 20:58:16
+ Date: 26/06/2023 22:56:56
 */
 
 SET NAMES utf8mb4;
@@ -105,6 +105,8 @@ CREATE TABLE `tbl_user`  (
 -- Records of tbl_user
 -- ----------------------------
 INSERT INTO `tbl_user` VALUES (2, 'admin', '$2b$04$npu/tKdhkuDxI54ljqtZt.fJmRjXiiOxOMkOEvN.SPMJq5p6PFT5S', 'test', 'testm', 'testlastname', 'sadsad@gmail.com', 0, '2023-06-21 22:27:04', '2023-06-21 22:27:04');
+INSERT INTO `tbl_user` VALUES (9, 'admin1', '$2b$04$y/wc9Ndj.frtyUGDv8Fp8uPd2GcQ6XRNsAkQ42OEF.ZSH/KQDXG92', 'test', 'testm', 'testlastname', 'sadsad@gmail.com', 0, '2023-06-26 21:01:05', '2023-06-26 21:01:05');
+INSERT INTO `tbl_user` VALUES (10, 'admin12', '$2b$04$yps9UCGk46GsZDOxhhxh3.cqq3.GBcxHfBvjZk3dwQNHXp57Htp0i', 'test', 'testm', 'testlastname', 'sadsad@gmail.com', 0, '2023-06-26 21:27:30', '2023-06-26 21:27:30');
 
 -- ----------------------------
 -- Table structure for tbl_userinfo

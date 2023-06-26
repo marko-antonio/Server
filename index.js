@@ -2,8 +2,12 @@ const express = require('express');
 const twilio = require('twilio');
 const app = express();
 const moment = require('moment');
+const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
+dotenv.config({path: './.env'})
+
+const secretKey = process.env.JWT_SECRET
 
 
 
@@ -44,11 +48,9 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-/** ----------------------------------- Middleware to verify the token ----------------------------*/
+/** ----------------------------------- Middleware ------------------------------------------*/
 
-dotenv.config({path: './.env'})
-
-const secretKey = process.env.JWT_SECRET
+dotenv.config({path: './.env'});
 
 function verifyToken(req, res, next) {
     const bearerHeader = req.headers['authorization'];
@@ -56,7 +58,15 @@ function verifyToken(req, res, next) {
     if (typeof bearerHeader !== 'undefined') {
       const bearerToken = bearerHeader.split(' ')[1];
       req.token = bearerToken;
-      next();
+      jwt.verify(req.token, secretKey, (error, authData) => {
+            if (error) {
+                res.status(403).json({ error: 'Invalid token' });
+            } 
+            
+            else {
+                next();
+            }
+        });
     } 
     else {
       res.status(403).json({ error: 'Unauthorized' });

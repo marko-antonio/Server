@@ -14,19 +14,19 @@ const Retrievealluser = require('../../services/accounts/getalluser');
 router.get(`/all`, async (req, res) => {
 
     try{
-        var result = 0;
-        jwt.verify(req.token, secretKey, (error, authData) => {
-            if (error) {
-              res.status(403).json({ message: 'Invalid token' });
-              result = 0;
-            } 
+        // var result = 0;
+        // jwt.verify(req.token, secretKey, (error, authData) => {
+        //     if (error) {
+        //       res.status(403).json({ message: 'Invalid token' });
+        //       result = 0;
+        //     } 
             
-            else {
-               result = 1;
-            }
-        });
+        //     else {
+        //        result = 1;
+        //     }
+        // });
 
-        if (result == 1){
+        // if (result == 1){
                 const { fields } = req.query
       
                 const results = await Retrievealluser(fields)
@@ -43,7 +43,7 @@ router.get(`/all`, async (req, res) => {
                     message: "Not Retrieved!"
                     })
                 }
-        }
+        // }
         
     }
     catch (error){

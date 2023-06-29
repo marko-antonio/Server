@@ -4,6 +4,8 @@ const app = express();
 const moment = require('moment');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const nodemailer = require('nodemailer');
+
 
 dotenv.config({path: './.env'})
 
@@ -37,6 +39,37 @@ app.listen(PORT,()=>{
 // }
 
 // sendSMS();
+
+/********************** Email testing ***************************************/
+// success
+// let mailTransporter = nodemailer.createTransport({
+//     service: "gmail",
+//     auth:{
+//         user:"mjpili016@gmail.com",
+//         pass:"xrqxniatwwxumtkg"
+//     }
+// })
+
+// let details = {
+//     from: "mjpili016@gmail.com",
+//     to: "markpili011@gmail.com",
+//     subject: "testing our nodemailer",
+//     text: "testing out first sender"
+// }
+
+// mailTransporter.sendMail(details,(err)=>{
+//     console.log("dumaan")
+//     if(err){
+//         console.log(err);
+//         console.log("dumaan1")
+//     }
+//     else{
+//         console.log("success")
+//         console.log("dumaan2")
+//     }
+// })
+
+
 
 /************************************ Cors **********************************/
 app.use(cors({
@@ -92,6 +125,7 @@ const Login = require('./routes/accounts/login.js');
 
 /*get All User*/
 const AllUser = require('./routes/accounts/alluser.js'); 
+
 
 /** --------------------------------- API Link ---------------------------------*/
 
